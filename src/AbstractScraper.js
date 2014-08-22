@@ -47,7 +47,14 @@ AbstractScraper.prototype = {
 	 */
 	get: function(url, callback) {
 		var that = this;
-		request.get(url, function processGet(error, response, body) {
+    
+		request.get({ 
+      uri: url, 
+      jar: true, 
+      headers: { 
+        "User-Agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410."
+      }
+    }, function processGet(error, response, body) {
 			that.response = response;
 			that.statusCode = response.statusCode;
 			that.body = body;
@@ -59,6 +66,7 @@ AbstractScraper.prototype = {
 				});
 			}
 		});
+    
 		return this;
 	},
 	/**
